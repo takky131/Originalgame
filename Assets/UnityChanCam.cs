@@ -7,22 +7,31 @@ public class UnityChanCam : MonoBehaviour
     private GameObject Unitychan;
     private GameObject enemy;
     private GameObject maincamera;
-    private float rotateSpeed = 4.0f;
-    Renderer enemyRenderer;
+    private float rotateSpeed = 6.0f;
+    public Renderer enemyRenderer;
+    private float distance = 25f;
+  
+
     // Start is called before the first frame update
     void Start()
     {
         Unitychan = GameObject.Find("unitychan");
         enemy = GameObject.Find("Ethan");
-        maincamera = Camera.main.gameObject;
-        GameObject enemyObject = GameObject.Find("EthanBody");    
-        enemyRenderer = enemyObject.GetComponent<Renderer>();
+        maincamera = Camera.main.gameObject;      
+       // enemyRenderer = enemyObject.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enemyRenderer.isVisible)
+        
+        Vector3 eyeDir = this.transform.forward; // プレイヤーの視線ベクトル
+        Vector3 playerPos = this.transform.position; // プレイヤーの位置
+        Vector3 enemyPos = enemy.transform.position; // 敵の位置
+
+        float angle = 30.0f;
+
+        if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
         {
             this.transform.LookAt(enemy.transform);
         }
@@ -30,7 +39,7 @@ public class UnityChanCam : MonoBehaviour
         {
             rotateCamera();
         }
-        rotateCamera();
+        
     }
 
     private void rotateCamera()
