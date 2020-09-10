@@ -46,6 +46,7 @@ public class UnityChanCam : MonoBehaviour
     {
         Vector3 angle = new Vector3(Input.GetAxis("Mouse X") * rotateSpeed, 0, 0);
         maincamera.transform.RotateAround(Unitychan.transform.position, Vector3.up, angle.x);
-    }
+    }          
+
 
 }
