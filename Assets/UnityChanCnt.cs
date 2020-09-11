@@ -26,24 +26,22 @@ public class UnityChanCnt : MonoBehaviour
     void Update()
     {
         this.delta += Time.deltaTime;
-        Vector3 eyeDir = this.transform.forward; // プレイヤーの視線ベクトル
-        Vector3 playerPos = this.transform.position; // プレイヤーの位置
-        Vector3 enemyPos = enemy.transform.position; // 敵の位置
+        
 
-        if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
-        {
-            if (Input.GetKey(KeyCode.UpArrow))
+       
+            if (Input.GetKey(KeyCode.W))
             {
                 myAnimator.SetBool("Runf Bool", true);
                 //  this.myRigidbody.AddForce(this.transform.forward * this.forwardForce);
                 this.myRigidbody.velocity = new Vector3(0, 0, 10);
+                
             }
             else
             {
                 myAnimator.SetBool("Runf Bool", false);
             }
 
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.S))
             {
                 myAnimator.SetBool("Back Bool", true);
                 this.myRigidbody.velocity = new Vector3(0, 0, -7);
@@ -53,7 +51,7 @@ public class UnityChanCnt : MonoBehaviour
                 myAnimator.SetBool("Back Bool", false);
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.A))
             {
                 myAnimator.SetBool("Runl Bool", true);
                 this.myRigidbody.velocity = new Vector3(-8, 0, 0);
@@ -63,7 +61,7 @@ public class UnityChanCnt : MonoBehaviour
                 myAnimator.SetBool("Runl Bool", false);
             }
 
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.D))
             {
                 myAnimator.SetBool("Runr Bool", true);
                 this.myRigidbody.velocity = new Vector3(8, 0, 0);
@@ -84,7 +82,7 @@ public class UnityChanCnt : MonoBehaviour
                 this.myAnimator.SetBool("JumpTrigger", true);
                 this.myRigidbody.AddForce(this.transform.up * this.upForce);
             }
-        }
+        
        
         
     }
