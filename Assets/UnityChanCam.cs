@@ -6,7 +6,8 @@ public class UnityChanCam : MonoBehaviour
 {
     public GameObject Unitychan;
     public GameObject enemy;
-    private GameObject maincamera;
+    public GameObject maincamera;
+    public GameObject closecamera;
     private float rotateSpeed = 6.0f;
     public Renderer enemyRenderer;
     private float distance = 25f;
@@ -17,7 +18,7 @@ public class UnityChanCam : MonoBehaviour
     {
        
         maincamera = Camera.main.gameObject;      
-       // enemyRenderer = enemyObject.GetComponent<Renderer>();
+        closecamera.SetActive(false);    
     }
 
     // Update is called once per frame
@@ -33,10 +34,14 @@ public class UnityChanCam : MonoBehaviour
         if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
         {
             this.transform.LookAt(Unitychan.transform);
+            maincamera.SetActive(false);
+            closecamera.SetActive(true);
         }
         else
         {
             rotateCamera();
+            closecamera.SetActive(false);
+            maincamera.SetActive(true);
         }
         
     }

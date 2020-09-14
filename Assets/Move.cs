@@ -32,9 +32,10 @@ public class Move : MonoBehaviour
 
         float angle = 30.0f;
 
-       if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
+       //if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
         {
-            //here
+            this.transform.LookAt(enemy.transform);
+                 
         }
     }
 
