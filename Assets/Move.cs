@@ -7,18 +7,35 @@ public class Move : MonoBehaviour
     float inputHorizontal;
     float inputVertical;
     Rigidbody rb;
-
-    float moveSpeed = 3f;
+    public GameObject enemy;
+    private float distance = 25f;
+    float moveSpeed = 10f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+       
     }
 
     void Update()
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
+
+        Vector3 eyeDir = this.transform.forward; // プレイヤーの視線ベクトル
+        Vector3 playerPos = this.transform.position; // プレイヤーの位置
+        
+        Vector3 enemyPos = enemy.transform.position; // 敵の位置
+       
+       
+        
+
+        float angle = 30.0f;
+
+       if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
+        {
+            //here
+        }
     }
 
     void FixedUpdate()
