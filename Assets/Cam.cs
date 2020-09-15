@@ -28,7 +28,7 @@ public class Cam : MonoBehaviour
         targetPos = targetObj.transform.position;
 
         // マウスの右クリックを押している間
-        if (Input.GetMouseButton(1))
+        //if (Input.GetMouseButton(1))
         {
             // マウスの移動量
             float mouseInputX = Input.GetAxis("Mouse X");
@@ -36,7 +36,7 @@ public class Cam : MonoBehaviour
             // targetの位置のY軸を中心に、回転（公転）する
             transform.RotateAround(targetPos, Vector3.up, mouseInputX * Time.deltaTime * 300f);
             // カメラの垂直移動（※角度制限なし、必要が無ければコメントアウト）
-            transform.RotateAround(targetPos, transform.right, mouseInputY * Time.deltaTime * 200f);
+           // transform.RotateAround(targetPos, transform.right, mouseInputY * Time.deltaTime * 200f);
         }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Unitychan
   - Enemy
+  - sphere
   layers:
   - Default
   - TransparentFX

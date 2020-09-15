@@ -10,7 +10,7 @@ public class Move : MonoBehaviour
     public GameObject enemy;
     private float distance = 25f;
     float moveSpeed = 10f;
-
+    public GameObject MainCamera;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,30 +22,38 @@ public class Move : MonoBehaviour
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 eyeDir = this.transform.forward; // プレイヤーの視線ベクトル
-        Vector3 playerPos = this.transform.position; // プレイヤーの位置
+       // Vector3 eyeDir = this.transform.forward; // プレイヤーの視線ベクトル
+       // Vector3 playerPos = this.transform.position; // プレイヤーの位置
         
-        Vector3 enemyPos = enemy.transform.position; // 敵の位置
+        //Vector3 enemyPos = enemy.transform.position; // 敵の位置
        
        
         
 
-        float angle = 30.0f;
+       // float angle = 30.0f;
 
-       //if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
+      // if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
+       {
+          // this.transform.LookAt(enemy.transform);
+                 
+       }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
         {
             this.transform.LookAt(enemy.transform);
-                 
         }
     }
 
     void FixedUpdate()
     {
         // カメラの方向から、X-Z平面の単位ベクトルを取得
-        Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 cameraForward = Vector3.Scale(MainCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
 
         // 方向キーの入力値とカメラの向きから、移動方向を決定
-        Vector3 moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
+        Vector3 moveForward = cameraForward * inputVertical + MainCamera.transform.right * inputHorizontal;
 
         // 移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
         rb.velocity = moveForward * moveSpeed + new Vector3(0, rb.velocity.y, 0);
@@ -56,4 +64,11 @@ public class Move : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(moveForward);
         }
     }
+
+    public void lookat()
+    {
+        this.transform.LookAt(enemy.transform);
+
+    }
+
 }

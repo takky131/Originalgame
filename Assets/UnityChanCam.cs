@@ -6,44 +6,65 @@ public class UnityChanCam : MonoBehaviour
 {
     public GameObject Unitychan;
     public GameObject enemy;
-    public GameObject maincamera;
-    public GameObject closecamera;
+    public Camera maincamera;
+    public Camera closecamera;
     private float rotateSpeed = 6.0f;
     public Renderer enemyRenderer;
     private float distance = 25f;
-  
+    public Move move;
 
     // Start is called before the first frame update
     void Start()
     {
-       
-        maincamera = Camera.main.gameObject;      
-        closecamera.SetActive(false);    
+
+
+        closecamera.enabled = false;    
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        Vector3 eyeDir = this.transform.forward; // プレイヤーの視線ベクトル
-        Vector3 playerPos = this.transform.position; // プレイヤーの位置
-        Vector3 enemyPos = enemy.transform.position; // 敵の位置
+       // Vector3 eyeDir = this.transform.forward; // プレイヤーの視線ベクトル
+        //Vector3 playerPos = this.transform.position; // プレイヤーの位置
+        //Vector3 enemyPos = enemy.transform.position; // 敵の位置
 
-        float angle = 30.0f;
+        //float angle = 30.0f;
 
-        if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
+       // if (Vector3.Angle((enemyPos - playerPos).normalized, eyeDir) <= angle && Vector3.Distance(enemyPos, playerPos) <= distance)
         {
-            this.transform.LookAt(Unitychan.transform);
-            maincamera.SetActive(false);
-            closecamera.SetActive(true);
+           // this.transform.LookAt(Unitychan.transform);
+           // maincamera.enabled = false;
+            //closecamera.enabled = true;
+            //move.lookat();
+
         }
-        else
+        //else
+
         {
-            rotateCamera();
-            closecamera.SetActive(false);
-            maincamera.SetActive(true);
+            //rotateCamera();
+            //closecamera.enabled = false;
+            //maincamera.enabled = true;
         }
         
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            maincamera.enabled = false;
+            closecamera.enabled = true;
+            move.lookat();
+        }
+        else
+
+        {
+            rotateCamera();
+            closecamera.enabled = false;
+            maincamera.enabled = true;
+        }
+
     }
 
     private void rotateCamera()
