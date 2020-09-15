@@ -44,6 +44,7 @@ public class Move : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             this.transform.LookAt(enemy.transform);
+            
         }
     }
 

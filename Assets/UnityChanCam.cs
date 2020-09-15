@@ -53,9 +53,11 @@ public class UnityChanCam : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            Debug.Log("a");
             maincamera.enabled = false;
             closecamera.enabled = true;
-            move.lookat();
+            move.gameObject.transform.LookAt(other.gameObject.transform.position);
+
         }
         else
 
