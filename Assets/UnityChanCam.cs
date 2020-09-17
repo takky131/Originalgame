@@ -13,6 +13,7 @@ public class UnityChanCam : MonoBehaviour
     private float distance = 25f;
     public Move move;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,27 +50,27 @@ public class UnityChanCam : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            Debug.Log("a");
-            maincamera.enabled = false;
-            closecamera.enabled = true;
-            move.gameObject.transform.LookAt(other.gameObject.transform.position);
+   // private void OnTriggerStay(Collider other)
+   // {
+       // if (other.gameObject.tag == "Enemy")
+      //  {
+       //     Debug.Log("a");
+          //  maincamera.enabled = false;
+          //  closecamera.enabled = true;
+            //move.gameObject.transform.LookAt(other.gameObject.transform.position);
 
-        }
-        else
+//        }
+  //      else
 
-        {
-            rotateCamera();
-            closecamera.enabled = false;
-            maincamera.enabled = true;
-        }
+    //    {
+      //      rotateCamera();
+        //    closecamera.enabled = false;
+          //  maincamera.enabled = true;
+        //}
 
-    }
+//    }
 
-    private void rotateCamera()
+    public void rotateCamera()
     {
         Vector3 angle = new Vector3(Input.GetAxis("Mouse X") * rotateSpeed, 0, 0);
         maincamera.transform.RotateAround(Unitychan.transform.position, Vector3.up, angle.x);
